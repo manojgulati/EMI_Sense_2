@@ -1,0 +1,10 @@
+* C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\AC Power Flow ver 1.2.asc
+L1 In2+ In2- 100µ Rser=0.01
+L2 Out2+ 0 900µ Rser=.01
+V1 In2+ 0 SINE(0 100 50) Rser=0.01
+L3 0 Out2- 900µ Rser=0.01
+V4 In2- 0 SINE(0 100 50) Rser=0.01
+.tran 1s
+K1 L1 L2 L3 1
+.backanno
+.end
