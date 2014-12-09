@@ -1,0 +1,24 @@
+Circuit: * C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\AC Power Flow ver2.4 (CM-DM Model Appl2) .asc
+
+WARNING: Node IN2- is floating.
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Sat Nov 29 11:04:20 2014
+Total elapsed time: 3.531 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 371643
+traniter = 371635
+tranpoints = 167379
+accept = 150944
+rejected = 16435
+matrix size = 18
+fillins = 8
+solver = Normal
+Matrix Compiler1: 1.36 KB object code size  0.8/0.4/[0.2]
+Matrix Compiler2: 1.35 KB object code size  0.3/0.7/[0.2]
+
+

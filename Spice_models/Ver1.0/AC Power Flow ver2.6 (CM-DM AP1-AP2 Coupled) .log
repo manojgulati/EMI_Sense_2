@@ -1,0 +1,52 @@
+Circuit: * C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\AC Power Flow ver2.6 (CM-DM AP1-AP2 Coupled) .asc
+
+WARNING: Node N016 is floating.
+
+Direct Newton iteration for .op point succeeded.
+Heightened Def Con from 6.25143e-005 to 6.2521e-005
+Heightened Def Con from 0.000315763 to 0.000315765
+Heightened Def Con from 0.000395763 to 0.000395765
+Heightened Def Con from 0.000915763 to 0.000915765
+Heightened Def Con from 0.00101576 to 0.00101576
+Heightened Def Con from 0.00111576 to 0.00111576
+Heightened Def Con from 0.00141576 to 0.00141576
+Heightened Def Con from 0.00196576 to 0.00196576
+Heightened Def Con from 0.00286576 to 0.00286576
+Heightened Def Con from 0.00296576 to 0.00296576
+Heightened Def Con from 0.00306576 to 0.00306576
+Heightened Def Con from 0.00351576 to 0.00351576
+Heightened Def Con from 0.00386576 to 0.00386576
+Heightened Def Con from 0.00416576 to 0.00416576
+Heightened Def Con from 0.00479576 to 0.00479577
+Heightened Def Con from 0.00501576 to 0.00501576
+Heightened Def Con from 0.00514576 to 0.00514577
+Heightened Def Con from 0.00601576 to 0.00601576
+Heightened Def Con from 0.00641576 to 0.00641576
+Heightened Def Con from 0.00676576 to 0.00676576
+Heightened Def Con from 0.00691576 to 0.00691576
+Heightened Def Con from 0.00729576 to 0.00729577
+Heightened Def Con from 0.00776576 to 0.00776576
+Heightened Def Con from 0.00786576 to 0.00786576
+Heightened Def Con from 0.00811576 to 0.00811576
+Heightened Def Con from 0.00836576 to 0.00836576
+Heightened Def Con from 0.00856576 to 0.00856576
+Heightened Def Con from 0.00891576 to 0.00891576
+
+Date: Sat Nov 29 11:31:59 2014
+Total elapsed time: 9.963 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 663537
+traniter = 663529
+tranpoints = 283283
+accept = 236292
+rejected = 47019
+matrix size = 34
+fillins = 46
+solver = Normal
+Matrix Compiler1: 5.18 KB object code size  2.0/1.4/[0.6]
+Matrix Compiler2: 3.17 KB object code size  0.7/1.1/[0.5]
+
+
