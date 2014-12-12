@@ -1,7 +1,13 @@
 clear all
-M1 = csvread('C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-2 [09-12-2014]\CFL.csv');
+M1 = csvread('C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Test.csv');
 y1  = M1(:,1);
 y2  = M1(:,2);
+
+% y1=y1*0.02;
+% y2=y2*0.02;
+
+y1=y1*0.000131;
+y2=y2*0.000131;
 
 fs = 125*(10^6);  %sample frequency in Hz
 T  = 1/fs;        %sample period in s
@@ -27,9 +33,11 @@ Y2 = fft(y2)/L;
 % Computing f vector for length fs/2
 f = fs/2*linspace(0,1,L/2+1);
 % Computing spectrum for Differential Mode EMI 
-Y_CM = abs(Y1+Y2)/2; 
+Y_CM = Y1;
+% abs(Y1+Y2)/2; 
 % Computing spectrum for Common Mode EMI 
-Y_DM = abs(Y1-Y2)/2; 
+Y_DM = Y2;
+% abs(Y1-Y2)/2; 
 % Computing magnitude of Vcm and Vdm for length L/2
 ampY_CM = 2*abs(Y_CM(1:L/2+1));
 ampY_DM = 2*abs(Y_DM(1:L/2+1));
@@ -40,20 +48,20 @@ figure;
 % figure('units','normalized','outerposition',[0 0 1 1])
 set(gcf,'Color','w');  %Make the figure background white
 subplot(2,1,1);
-plot(f/1000000,10*log10((ampY_DM.^2)/10^6),'r');
-ylabel('Amplitude(dBW)');
+plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
+ylabel('Amplitude(dBm)');
 title('Amplitude Spectrum of EMI');
 legend('DM');
-ylim([-120 -20]);
+% ylim([-150 -40]);
 xlim([0 63]);
 grid on;
 %hold on;
 subplot(2,1,2);
-plot(f/1000000,10*log10((ampY_CM.^2)/10^6),'b');
-ylabel('Amplitude(dBW)');
+plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+ylabel('Amplitude(dBm)');
 xlabel('Frequency (MHz)');
 legend('CM');
-ylim([-120 -20]);
+% ylim([-150 -40]);
 xlim([0 63]);
 grid on;
 
@@ -64,6 +72,6 @@ grid on;
 %title('Amplitude Spectrum of EMI');
 %set(gca,'Box','off');  %Axes on left and bottom only
 
-ConvertPlot4Publication('CFL')
+ConvertPlot4Publication('BGN')
 %Export again, this time changing the font and using the same x-axis
 % ConvertPlot4Publication('testPlot2', 'fontsize', 8, 'fontname', 'Arial', 'samexaxes', 'on', 'pdf', 'off')

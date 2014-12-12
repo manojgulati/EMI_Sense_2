@@ -1,7 +1,13 @@
 clear all
-M1 = csvread('C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-2 [09-12-2014]\CFL.csv');
+M1 = csvread('C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Test.csv');
 y1  = M1(:,1);
 y2  = M1(:,2);
+
+% y1=y1*0.02;
+% y2=y2*0.02;
+
+y1=y1*0.000131;
+y2=y2*0.000131;
 
 fs = 125*(10^6);  %sample frequency in Hz
 T  = 1/fs;        %sample period in s
@@ -44,7 +50,7 @@ plot(f/1000000,10*log10((ampY_DM.^2)/10^6),'r');
 ylabel('Amplitude(dBW)');
 title('Amplitude Spectrum of EMI');
 legend('DM');
-ylim([-120 -20]);
+% ylim([-150 -40]);
 xlim([0 63]);
 grid on;
 %hold on;
@@ -53,7 +59,7 @@ plot(f/1000000,10*log10((ampY_CM.^2)/10^6),'b');
 ylabel('Amplitude(dBW)');
 xlabel('Frequency (MHz)');
 legend('CM');
-ylim([-120 -20]);
+% ylim([-150 -40]);
 xlim([0 63]);
 grid on;
 
@@ -64,6 +70,6 @@ grid on;
 %title('Amplitude Spectrum of EMI');
 %set(gca,'Box','off');  %Axes on left and bottom only
 
-ConvertPlot4Publication('CFL')
+ConvertPlot4Publication('BGN')
 %Export again, this time changing the font and using the same x-axis
 % ConvertPlot4Publication('testPlot2', 'fontsize', 8, 'fontname', 'Arial', 'samexaxes', 'on', 'pdf', 'off')
