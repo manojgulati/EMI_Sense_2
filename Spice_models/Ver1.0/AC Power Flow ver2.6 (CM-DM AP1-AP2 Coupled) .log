@@ -1,4 +1,4 @@
-Circuit: * C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\AC Power Flow ver2.6 (CM-DM AP1-AP2 Coupled) .asc
+Circuit: * C:\Users\Astha Gupta\Dropbox\EMI_Sense_2\Spice_models\Ver1.0\AC Power Flow ver2.6 (CM-DM AP1-AP2 Coupled) .asc
 
 WARNING: Node N016 is floating.
 
@@ -32,8 +32,8 @@ Heightened Def Con from 0.00836576 to 0.00836576
 Heightened Def Con from 0.00856576 to 0.00856576
 Heightened Def Con from 0.00891576 to 0.00891576
 
-Date: Sat Nov 29 11:31:59 2014
-Total elapsed time: 9.963 seconds.
+Date: Mon Dec 15 11:05:25 2014
+Total elapsed time: 7.783 seconds.
 
 tnom = 27
 temp = 27
@@ -46,7 +46,7 @@ rejected = 47019
 matrix size = 34
 fillins = 46
 solver = Normal
-Matrix Compiler1: 5.18 KB object code size  2.0/1.4/[0.6]
-Matrix Compiler2: 3.17 KB object code size  0.7/1.1/[0.5]
+Matrix Compiler1: 5.18 KB object code size  1.7/1.1/[0.6]
+Matrix Compiler2: 3.17 KB object code size  0.6/0.9/[0.6]
 
 
