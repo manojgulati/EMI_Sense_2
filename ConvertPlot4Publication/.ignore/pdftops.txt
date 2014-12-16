@@ -1,1 +1,1 @@
-C:\Program Files\xpdf\pdftops.exe
+C:\Program Files\Xpdf\bin64\pdftops.exe

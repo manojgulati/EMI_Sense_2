@@ -2,18 +2,23 @@
 % Manoj Gulati
 % IIIT-D
 
-% clear all prevsiously stored variables
+% clear all previously stored variables
 clear all
 
-File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-8 [15-12-2014]\cfl99';
-
+File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-8 [15-12-2014]\bgn';
+No_of_traces = 99;
 % Fetch content from files taken from Redpitaya
-M1 = csvread(strcat(File_Path,'.csv'));
+% M1=zeros(16384,2,No_of_traces);
+for i = 1:99
+    M1(:,:,i)=importdata(strcat(File_Path,int2str(i),'.csv'));
+end
 
-% Fetch content for Channel-1 (Vphase)
-y1  = M1(:,1);
-% Fetch content for Channel-2 (Vneutral)
-y2  = M1(:,2);
+for i = 1:No_of_traces
+    % Fetch content for Channel-1 (Vphase)
+    y1(:,i)  = M1(:,1,i);
+    % Fetch content for Channel-2 (Vneutral)
+    y2(:,i)  = M1(:,2,i);
+end
 
 % Adding offset as precribed by redpitaya wiki after measurement data collected using 50 ohm termination. 
 % This will be added to compensate for avg. noise captured by AFE of Redpitaya in open circuit mode over 100 traces.
@@ -43,79 +48,98 @@ t  = (0:L-1) * T; %time vector
 % y2 = 5*sin(2*pi*f1*t)-10*sin(2*pi*f2*t);%test signal
 
 % Plot time domain data
-plot(y1(1:16384),'r');
-hold on;
-plot(y2(1:16384),'b');
+% plot(y1(1:16384),'r');
+% hold on;
+% plot(y2(1:16384),'b');
 
 %% Paragraph Break
 
-% Computing spectrum for Phase 
-Y1 = fft(y1)/L;
-% Computing spectrum for Neutral 
-Y2 = fft(y2)/L;
+ampY_CM = zeros(L/2+1,No_of_traces);
+ampY_DM = zeros(L/2+1,No_of_traces);
+
+for i = 1:No_of_traces
+    % Computing spectrum for Phase 
+    Y1(:,i)  = fft(y1(:,i))/L;
+    % Computing spectrum for Neutral 
+    Y2(:,i)  = fft(y2(:,i))/L;
+    % Computing spectrum for Differential Mode EMI 
+    Y_CM(:,i) = abs(Y1(:,i)+Y2(:,i))/2; 
+    % Computing spectrum for Common Mode EMI 
+    Y_DM(:,i) = abs(Y1(:,i)-Y2(:,i))/2; 
+    % Computing magnitude of Vcm and Vdm for length L/2
+    ampY_CM(:,i) = 2*abs(Y_CM(1:L/2+1,i));
+    ampY_DM(:,i) = 2*abs(Y_DM(1:L/2+1,i));
+end
+
+AmpY_CM = sum(ampY_CM,2);
+AmpY_DM = sum(ampY_DM,2);
+
+AmpY_CM = AmpY_CM/No_of_traces;
+AmpY_DM = AmpY_DM/No_of_traces;
+
 % Computing f vector for length fs/2
 f = fs/2*linspace(0,1,L/2+1);
-% Computing spectrum for Differential Mode EMI 
-Y_CM = abs(Y1+Y2)/2; 
-% % Computing spectrum for Common Mode EMI 
-Y_DM = abs(Y1-Y2)/2; 
-% Computing magnitude of Vcm and Vdm for length L/2
-ampY_CM = 2*abs(Y_CM(1:L/2+1));
-ampY_DM = 2*abs(Y_DM(1:L/2+1));
+    
+% Y1 = fft(y1)/L;
+% Y2 = fft(y2)/L;
 
 
 %% Paragraph Break
-
-%Plot spectrum.
-figure;
-% figure('units','normalized','outerposition',[0 0 1 1]);
-set(gcf,'Color','w');  %Make the figure background white
-subplot(2,1,1);
-plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
-ylabel('Amplitude|Y-DM|(dBm)');
-title('Amplitude Spectrum of EMI');
-legend('DM');
-ylim([-150 -70]);
-xlim([0 63]);
-grid on;
-%hold on;
-subplot(2,1,2);
-plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
-ylabel('Amplitude|Y-CM|(dBm)');
-xlabel('Frequency (MHz)');
-legend('CM');
-ylim([-150 -70]);
-xlim([0 63]);
-grid on;
+% 
+% %Plot spectrum.
+% figure;
+% % figure('units','normalized','outerposition',[0 0 1 1]);
+% set(gcf,'Color','w');  %Make the figure background white
+% subplot(2,1,1);
+% plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
+% ylabel('Amplitude|Y-DM|(dBm)');
+% title('Amplitude Spectrum of EMI');
+% legend('DM');
+% ylim([-150 -70]);
+% xlim([0 63]);
+% grid on;
+% %hold on;
+% subplot(2,1,2);
+% plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+% ylabel('Amplitude|Y-CM|(dBm)');
+% xlabel('Frequency (MHz)');
+% legend('CM');
+% ylim([-150 -70]);
+% xlim([0 63]);
+% grid on;
 
 % Function to plot as per IEEE publication specifications in 4 formats eps, fig, PDF and png
-ConvertPlot4Publication(File_Path);
+% ConvertPlot4Publication(File_Path);
 
 %Export again, this time changing the font and using the same x-axis
 % ConvertPlot4Publication('testPlot2', 'fontsize', 8, 'fontname', 'Arial', 'samexaxes', 'on', 'pdf', 'off');
 
 %% Paragraph Break
 
+f1 = f(1:683)/1000000;
+AMPY_DM = AmpY_DM(1:683);
+AMPY_CM = AmpY_CM(1:683);
+
 %Plot spectrum.
 figure('units','normalized','outerposition',[0 0 1 1]);
 set(gcf,'Color','w');  %Make the figure background white
 subplot(2,1,1);
-plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
+plot(f1,10*log10(1000*((AMPY_DM.^2)/10^6)),'r');
 ylabel('Amplitude|Y-DM|(dBm)');
 title('Amplitude Spectrum of EMI');
 legend('DM');
-ylim([-150 -70]);
-xlim([0 63]);
+ylim([-125 -30]);
+% xlim([0 31.5]);
 grid on;
 %hold on;
 subplot(2,1,2);
-plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+plot(f1,10*log10(1000*((AMPY_CM.^2)/10^6)),'b');
 ylabel('Amplitude|Y-CM|(dBm)');
 xlabel('Frequency (MHz)');
 legend('CM');
-ylim([-150 -70]);
-xlim([0 63]);
+ylim([-125 -30]);
+% xlim([0 31.5]);
 grid on;
 
 % Function to plot as per IEEE publication specifications in 4 formats eps, fig, PDF and png
-saveas(gcf,strcat(File_Path,'_analyse.bmp'));
+saveas(gcf,strcat(File_Path,'_analyse12.bmp'));
