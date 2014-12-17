@@ -6,17 +6,42 @@
 clear all
 
 % Fetch content from files taken from Redpitaya
-M1 = dlmread('C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-7 [15-12-2014]\test.csv',' ');
+M1 = importdata('C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-7 [15-12-2014]\test.csv');
+
+    
+M1
+
+% j=0;
 
 % Fetch content for Channel-1 (Vphase)
 y1  = M1(:,1);
-% Fetch content for Channel-2 (Vneutral)
 y2  = M1(:,2);
+% length(M1)
+% 
+% 
+% M1(1)
+% M1(2)
+% M1(3)
+% M1(16384)
+% M1(16385)
+
+% Fetch content for Channel-2 (Vneutral)
+% for i=2:2:32792
+%     j=j+1;
+%     y1(j)=y(i-1);
+%     y2(j)=y(i);
+% end;
+
+% y=length(y1)
+% y=length(y2)
+
+y1  = y1 + 37;
+y2  = y2 + 108;
 
 % Scaling factor for digital to analog conversion of ADC values.
 % Resolution = 2*Vp/2^14 i.e. 2*1.079V/16384 = 0.0001317 
-% y1=y1*0.000131;
-% y2=y2*0.000131;
+y1=y1*0.000131;
+y2=y2*0.000131;
 
 % Scaling factor for compensating for potential divider added in output section.
 % i.e. Using potential divider we scaled the potential of HPF by 1/4.
@@ -29,7 +54,7 @@ T  = 1/fs;        %sample period in s
 L  = 16384;       %signal length
 t  = (0:L-1) * T; %time vector
 
-% Dummy signals for testing algorithm (uncomment to verify FFT computation)
+% % Dummy signals for testing algorithm (uncomment to verify FFT computation)
 % f1 = 5*10^6;
 % f2 = 10*10^6;
 % y1 = 5*sin(2*pi*f1*t)+10*sin(2*pi*f2*t);%test signal
@@ -40,7 +65,7 @@ plot(y1(1:100),'r');
 hold on;
 plot(y2(1:100),'b');
 
-%% Paragraph Break
+% %% Paragraph Break
 
 % Computing spectrum for Phase 
 Y1 = fft(y1)/L;
