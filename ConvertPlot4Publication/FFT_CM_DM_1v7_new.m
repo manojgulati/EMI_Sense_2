@@ -5,10 +5,10 @@
 % clear all prevsiously stored variables
 clear all
 
-File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-8 [15-12-2014]\cfl99';
+File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-10 [16-12-2014]\MC\MC1_50';
 
 % Fetch content from files taken from Redpitaya
-M1 = csvread(strcat(File_Path,'.csv'));
+M1 = importdata(strcat(File_Path,'.csv'));
 
 % Fetch content for Channel-1 (Vphase)
 y1  = M1(:,1);
@@ -43,9 +43,9 @@ t  = (0:L-1) * T; %time vector
 % y2 = 5*sin(2*pi*f1*t)-10*sin(2*pi*f2*t);%test signal
 
 % Plot time domain data
-plot(y1(1:16384),'r');
-hold on;
-plot(y2(1:16384),'b');
+% plot(y1(1:16384),'r');
+% hold on;
+% plot(y2(1:16384),'b');
 
 %% Paragraph Break
 
@@ -66,34 +66,34 @@ ampY_DM = 2*abs(Y_DM(1:L/2+1));
 
 %% Paragraph Break
 
-%Plot spectrum.
-figure;
-% figure('units','normalized','outerposition',[0 0 1 1]);
-set(gcf,'Color','w');  %Make the figure background white
-subplot(2,1,1);
-plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
-ylabel('Amplitude|Y-DM|(dBm)');
-title('Amplitude Spectrum of EMI');
-legend('DM');
-ylim([-150 -70]);
-xlim([0 63]);
-grid on;
-%hold on;
-subplot(2,1,2);
-plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
-ylabel('Amplitude|Y-CM|(dBm)');
-xlabel('Frequency (MHz)');
-legend('CM');
-ylim([-150 -70]);
-xlim([0 63]);
-grid on;
-
-% Function to plot as per IEEE publication specifications in 4 formats eps, fig, PDF and png
-ConvertPlot4Publication(File_Path);
-
-%Export again, this time changing the font and using the same x-axis
-% ConvertPlot4Publication('testPlot2', 'fontsize', 8, 'fontname', 'Arial', 'samexaxes', 'on', 'pdf', 'off');
-
+% %Plot spectrum.
+% figure;
+% % figure('units','normalized','outerposition',[0 0 1 1]);
+% set(gcf,'Color','w');  %Make the figure background white
+% subplot(2,1,1);
+% plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
+% ylabel('Amplitude|Y-DM|(dBm)');
+% title('Amplitude Spectrum of EMI');
+% legend('DM');
+% ylim([-150 -70]);
+% xlim([0 63]);
+% grid on;
+% %hold on;
+% subplot(2,1,2);
+% plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+% ylabel('Amplitude|Y-CM|(dBm)');
+% xlabel('Frequency (MHz)');
+% legend('CM');
+% ylim([-150 -70]);
+% xlim([0 63]);
+% grid on;
+% 
+% % Function to plot as per IEEE publication specifications in 4 formats eps, fig, PDF and png
+% ConvertPlot4Publication(File_Path);
+% 
+% %Export again, this time changing the font and using the same x-axis
+% % ConvertPlot4Publication('testPlot2', 'fontsize', 8, 'fontname', 'Arial', 'samexaxes', 'on', 'pdf', 'off');
+% 
 %% Paragraph Break
 
 %Plot spectrum.

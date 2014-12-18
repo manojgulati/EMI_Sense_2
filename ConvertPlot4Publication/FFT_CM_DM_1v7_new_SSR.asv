@@ -5,7 +5,7 @@
 % clear all prevsiously stored variables
 clear all
 
-File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-10 [16-12-2014]\MC\MC1_50';
+File_Path = 'C:\Users\manojg\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-10 [16-12-2014]\CFL\CFL1_1';
 
 % Fetch content from files taken from Redpitaya
 M1 = importdata(strcat(File_Path,'.csv'));
@@ -99,23 +99,25 @@ ampY_DM = 2*abs(Y_DM(1:L/2+1));
 %Plot spectrum.
 figure('units','normalized','outerposition',[0 0 1 1]);
 set(gcf,'Color','w');  %Make the figure background white
-subplot(2,1,1);
-plot(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'r');
+% subplot(2,1,1);
+semilogx(f/1000000,10*log10(1000*((ampY_DM.^2)/10^6)),'rx');
+set(gca,'xlim',[0 1]);
 ylabel('Amplitude|Y-DM|(dBm)');
 title('Amplitude Spectrum of EMI');
-legend('DM');
-ylim([-150 -70]);
-xlim([0 63]);
+% ylim([-150 -70]);
+% xlim([0 63]);
 grid on;
-%hold on;
-subplot(2,1,2);
-plot(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+hold on;
+% subplot(2,1,2);
+semilogx(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
+set(gca,'xlim',[0 1]);
 ylabel('Amplitude|Y-CM|(dBm)');
-xlabel('Frequency (MHz)');
-legend('CM');
-ylim([-150 -70]);
-xlim([0 63]);
+xlabel('Frequency (Hz)');
+legend('DM','CM');
+% legend('CM');
+% ylim([-150 -70]);
+% xlim([0 63]);
 grid on;
 
 % Function to plot as per IEEE publication specifications in 4 formats eps, fig, PDF and png
-saveas(gcf,strcat(File_Path,'_analyse.bmp'));
+saveas(gcf,strcat(File_Path,'_visualize.bmp'));
