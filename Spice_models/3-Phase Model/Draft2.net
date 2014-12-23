@@ -1,0 +1,12 @@
+* C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\3-Phase Model\Draft2.asc
+V1 N001 N003 SINE(0 10 10000) Rser=1
+V2 N004 N003 SINE(0 10 40000) Rser=1
+V3 Vph1 0 SINE(0 100 50)
+R1 N001 Vph1 5
+R2 N004 0 5
+V5 N001 N004 SINE(0 10 85000)
+R3 N002 N003 1
+R4 N002 0 5
+.tran 0 20m 0 0.0001
+.backanno
+.end

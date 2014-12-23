@@ -6,7 +6,7 @@
 clear all
 clc
 
-File_Path = 'C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-10 [16-12-2014]\CFL\CFL2_5';
+File_Path = 'C:\Users\Puneet\Dropbox\EMI_Sense_2\EMI_SENSE_2 [Data]\Redpitaya [Data]\Trace-10 [16-12-2014]\CFL\CFL5_85';
 
 % Fetch content from files taken from Redpitaya
 M1 = importdata(strcat(File_Path,'.csv'));
@@ -114,7 +114,7 @@ hold on;
 semilogx(f/1000000,10*log10(1000*((ampY_CM.^2)/10^6)),'b');
 set(gca,'xlim',[0 1]);
 ylabel('Amplitude(dBm)');
-xlabel('Frequency(Hz)');
+xlabel('Frequency(MHz)');
 legend('DM','CM');
 ylim([-140 -10]);
 % xlim([0 63]);
