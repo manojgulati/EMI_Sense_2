@@ -1,0 +1,22 @@
+Circuit: * C:\Users\manojg\Dropbox\EMI_Sense_2\Spice_models\3-Phase Model\Draft4.asc
+
+.OP point found by inspection.
+
+Date: Tue Dec 30 06:32:44 2014
+Total elapsed time: 2.470 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 263724
+traniter = 263724
+tranpoints = 131863
+accept = 88039
+rejected = 43824
+matrix size = 6
+fillins = 1
+solver = Normal
+Matrix Compiler1: 272 bytes object code size  0.3/0.1/[0.1]
+Matrix Compiler2: 422 bytes object code size  0.2/0.3/[0.1]
+
+
